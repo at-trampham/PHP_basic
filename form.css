@@ -1,0 +1,29 @@
+.alignCenter {
+	text-align: center;
+}
+input {
+	width: 350px;
+	height: 30px;
+	margin-bottom: 20px;
+}
+.signup {
+	width: 90px;
+	height: 40px;
+}
+a {
+	text-decoration: none;
+}
+table {
+    border-collapse: collapse;
+    margin: 0 auto; 
+}
+
+th,td {
+    border: 1px solid black;
+    width: 180px;
+    height: 30px;
+}
+th {
+    background-color: #4CAF50;
+    color: white;
+}
