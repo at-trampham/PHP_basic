@@ -11,10 +11,6 @@
         {
              $obj=new Post();
              $data['post_data']=$obj->show();       
-             
-            // echo "<pre>";
-            //  print_r($data['post_data']);
-            //  echo "</pre>";  
              view('posts.index',$data);
         }
         public function post(){
@@ -32,7 +28,9 @@
             }
             view('posts.post');
         }
-        public function detail(){
-            view('posts.detail');
+        public function detail($id){
+            $obj=new Post();
+            $detail_data['detail_post']=$obj->find($id);
+             view('posts.detail',$detail_data);
         }
     }

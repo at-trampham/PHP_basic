@@ -15,7 +15,7 @@ class Post extends Model
     public function show($fields = ['*']){
 
             $fields = implode(',', $fields);
-            $sql = "SELECT {$fields} FROM {$this->table} INNER JOIN users ON {$this->table}.id_users= users.id";
+            $sql = "SELECT {$this->table}.{$fields},users.username FROM {$this->table} INNER JOIN users ON {$this->table}.id_users= users.id";
             $stmt = static::$db->prepare($sql);
             $stmt->execute();
             return $stmt->fetchAll();

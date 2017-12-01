@@ -4,7 +4,7 @@ include '../public/layout/header.php';
  <div class="container">
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
-          <?php
+          <?php 
               foreach ($post_data as $data) {
                 $id=$data['id'];
                 $title=$data['title'];
@@ -13,11 +13,12 @@ include '../public/layout/header.php';
                 $date_create=$data['date_create'];
                 $id_users=$data['id_users'];
                 $username=$data['username'];
+
           ?>
           <div class="post-preview">
             <a href="">
               <h2 class="post-title">
-                <font face = Arial, size = 5><?php echo $title ?></font>
+                <a href="/posts/detail/<?php echo $id ?>"><font face = Arial, size = 5><?php echo $title ?></font></a>
               </h2>
               <h3 class="post-subtitle">
                <font face = Arial, size = 3><?php echo $description ?></font>
