@@ -1,7 +1,7 @@
 <?php
 include ('../public/layout/header.php');
 ?>
-<form action="" method="post">
+<form action="" method="post" id='myForm' >
   <div class="imgcontainer">
     <img src="../../img/img_avatar2.png" alt="Avatar" class="avatar">
   </div>
@@ -15,6 +15,20 @@ include ('../public/layout/header.php');
     <button type="submit" name='submit'>Login</button>
   </div>
 </form>
+<script type="text/javascript">
+      $(document).ready(function() {
+        $("#myForm").validate({
+            rules: {
+                username: "required",
+                password: "required",
+            },
+            messages: {
+                username: "Vui lòng nhập username",
+                username: "Vui lòng nhập password",
+            }
+        });
+    });
+</script>
 <?php
 include('../public/layout/footer.php');
 ?>

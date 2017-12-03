@@ -24,6 +24,12 @@
                 $date_create = $now["hours"] . ":" . $now["minutes"] . ":" . $now["seconds"] .  "  - " .  $now["mday"] . "/" . $now["mon"] . "/" . $now["year"] ;
                 $data=new Post();
                 $insert_data=$data->insert($title,$description,$detail,$date_create,$id_users);
+                if($insert_data){
+                    $data=Session::get('arr_user');
+                    $id_users=$data['id'];
+                    header("LOCATION:/users/personal/{$id_users}");
+                    exit();
+                }
                 
             }
             view('posts.post');
@@ -32,5 +38,38 @@
             $obj=new Post();
             $detail_data['detail_post']=$obj->find($id);
              view('posts.detail',$detail_data);
+        }
+        public function delete_post($id){
+            if(isset($_POST['delete'])){
+                $data=Session::get('arr_user');
+                $id_users=$data['id'];
+                $obj=new Post();
+                $obj->delete($id);
+                header("LOCATION:/users/personal/{$id_users}");
+                exit();
+            }
+        }
+        public function edit_post($id){
+            $obj=new Post();
+            $data['data_post']=$obj->find($id);
+            view('posts.edit-post',$data);
+        }
+        public function edit($id){
+            if(isset($_POST['submit'])){
+                $title=$_POST['title'];
+                $description=$_POST['description'];
+                $detail_post=$_POST['detail'];
+                $obj=new Post();
+                $data=$obj->update($title,$description,$detail_post,$id);
+                if($data){
+                    $data=Session::get('arr_user');
+                    $id_users=$data['id'];
+                    header("LOCATION:/users/personal/{$id_users}");
+                    exit(); 
+                }
+                
+
+            }
+           
         }
     }

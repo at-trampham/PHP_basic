@@ -4,15 +4,15 @@
 
     use App\Models\User;
     use App\Core\Session;
+    use App\Models\Post;
 
     class UsersController extends Controller
     {
-        public function show($id)
+        public function personal($id)
         {
-            $user=new User();
-
-            $data['aaa']=$user->find($id);
-             view('users.show',$data);
+            $obj=new Post();
+            $user_post['data']=$obj->user_post($id);
+            view('users.personal-info',$user_post);
         }
         public function login(){
             if(isset($_POST['submit'])){
@@ -38,5 +38,6 @@
             Session::destroy();
                 header ("LOCATION:/users/login");
                 exit();
-            }
+        }
+        
     }

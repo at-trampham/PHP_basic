@@ -20,4 +20,21 @@ class Post extends Model
             $stmt->execute();
             return $stmt->fetchAll();
     }
+    public function user_post($id){
+            $sql = "SELECT {$this->table}.*,users.username FROM {$this->table} INNER JOIN users ON {$this->table}.id_users= users.id WHERE users.id='$id'";
+            $stmt = static::$db->prepare($sql);
+            $stmt->execute();
+            return $stmt->fetchAll();
+    }
+    public function delete($id){
+         $sql = $sql = "DELETE FROM {$this->table} WHERE {$this->primaryKey}='$id'";
+         $stmt = static::$db->prepare($sql);
+         return $stmt->execute();
+    }
+    public function update($title,$description,$detail_post,$id){
+        $sql = "UPDATE {$this->table} SET title='$title',description='$description',detail_post='$detail_post' WHERE id='$id'";
+
+        $stmt = static::$db->prepare($sql);
+        return $stmt->execute();
+    }
 }
