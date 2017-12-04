@@ -6,6 +6,7 @@ include('dbconnect.php');
 <html>
 <head>
   <title>Register</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <link rel="stylesheet" type="text/css" href="form.css">
   <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
   <script type="text/javascript" src="jquery.validate.js"></script>
@@ -29,7 +30,7 @@ include('dbconnect.php');
         $tmp_name=$_FILES['image']['tmp_name'];
         $path_upload='Images/'.$picture;
         move_uploaded_file($tmp_name,$path_upload);
-       $sql="INSERT INTO users(username, password, fullname, email,image) VALUES('$username','$password','$fullname','$email','$picture')";
+        $sql="INSERT INTO users(username, password, fullname, email,image) VALUES('$username','$password','$fullname','$email','$picture')";
       }
       $insert_count = $conn->exec($sql);
       if($insert_count){
@@ -79,19 +80,19 @@ include('dbconnect.php');
         },
       messages:{
         username:{
-          required:"<span style=color:red><strong>Không được để trống.</strong></span>"
+          required:"<span style=color:red><strong>Username empty.</strong></span>"
           
         },
         password:{
-          required:"<span style=color:red><strong>Không được để trống.</strong></span>"
+          required:"<span style=color:red><strong>Password empty.</strong></span>"
           
         },
         fullname:{
-          required:"<span style=color:red><strong>Không được để trống.</strong></span>"
+          required:"<span style=color:red><strong>Fullname empty.</strong></span>"
           
         },
         email:{
-          required:"<span style=color:red><strong>Không được để trống.</strong></span>"
+          required:"<span style=color:red><strong>email empty.</strong></span>"
           
         },
       }

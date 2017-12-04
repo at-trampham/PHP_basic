@@ -8,6 +8,7 @@ include('dbconnect.php');
 <html>
 <head>
   <title>Information</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <link rel="stylesheet" type="text/css" href="form.css">
   <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
   <script type="text/javascript" src="jquery.validate.js"></script>
@@ -15,17 +16,23 @@ include('dbconnect.php');
 <body>
 <div class='alignCenter'>
   <h3>PERSONAL INFORMATION</h3>
+  
   <?php
     if(!isset($_SESSION['user_info'])){
       header ("LOCATION:login.php");
       exit();
     }else{
-      $iduser=$_SESSION['user_info'][0]['idusers'];
-      $user=$_SESSION['user_info'][0]['username'];
-      $pass=$_SESSION['user_info'][0]['password'];
-      $fullname=$_SESSION['user_info'][0]['fullname'];
-      $email=$_SESSION['user_info'][0]['email'];
-      $img=$_SESSION['user_info'][0]['image'];
+        $iduser=$_SESSION['user_info'][0]['id'];
+        $sql="SELECT * FROM users WHERE id='$iduser'";
+        $exe = $conn->prepare($sql);
+        $exe->execute();
+        $exe->setFetchMode(PDO::FETCH_ASSOC);
+        $result = $exe->fetchAll(); 
+        $user=$result[0]['username'];
+        $pass=$result[0]['password'];
+        $fullname=$result[0]['fullname'];
+        $email=$result[0]['email'];
+        $img=$result[0]['image'];
   ?>
   <form id="form" action="" method="post" enctype="multipart/form-data">
     <label>Username:</label><br>
@@ -48,6 +55,7 @@ include('dbconnect.php');
     <input type="file" name="pic"><br>
     <input class='signup' type="submit" name="submit" value="Edit">
     <p><a href='javascript:history.go(-1)'>Quay lại</a></p>
+    <p><a href='list-user.php'>LIST USERS</a></p>
   </form>
   <?php
     }
@@ -60,32 +68,36 @@ include('dbconnect.php');
       echo $picture;
       if($picture==''){
          if($password!=''){
-          $sql="UPDATE users SET username='$username',password='$password',fullname='$fulln',email='$mail' WHERE idusers='$iduser'";
+          $sql="UPDATE users SET username='$username',password='$password',fullname='$fulln',email='$mail' WHERE id='$iduser'";
 
           }else{
-            $sql="UPDATE users SET username='$username',fullname='$fulln',email='$mail' WHERE idusers='$iduser'";
+            $sql="UPDATE users SET username='$username',fullname='$fulln',email='$mail' WHERE id='$iduser'";
           }
       }else{
         $arr_exp=explode(".",$picture);
         $endfile=end($arr_exp);
         $picture="hinh-" .time().".".$endfile;
-        $tmp_name=$_FILES['image']['tmp_name'];
+        $tmp_name=$_FILES['pic']['tmp_name'];
         $path_upload='Images/'.$picture;
         move_uploaded_file($tmp_name,$path_upload);
           if($password!=''){
-          $sql="UPDATE users SET username='$username',password='$password',fullname='$fulln',email='$mail',image='$picture' WHERE idusers='$iduser'";
+          $sql="UPDATE users SET username='$username',password='$password',fullname='$fulln',email='$mail',image='$picture' WHERE id='$iduser'";
 
           }else{
-            $sql="UPDATE users SET username='$username',fullname='$fulln',email='$mail',image='$picture' WHERE idusers='$iduser'";
+            $sql="UPDATE users SET username='$username',fullname='$fulln',email='$mail',image='$picture' WHERE id='$iduser'";
             }
         }
-      // $update_count = $conn->prepare($sql);
-      // $update_count->execute();
-        echo $sql;
-      
+      $update_count = $conn->prepare($sql);
+      $check=$update_count->execute();
+      if($check){
+        header ("LOCATION:edit-info.php");
+        exit();
+      }
     }
   ?> 
+  <h4><a href="logout.php">LOGOUT</h4>
 </div>
+
 <script type="text/javascript">
   $(document).ready(function(){
     $("#form").validate({

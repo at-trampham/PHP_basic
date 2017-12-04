@@ -3,19 +3,22 @@
 <html>
 <head>
 	<title>Users List</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
 	<link rel="stylesheet" type="text/css" href="form.css">
 </head>
 <body>
-<div class='alignCenter'>
+	
+	<div class='alignCenter'>
+	
 	<?php
 	$sql = "SELECT * FROM users";
-	$exe = $conn->query($sql);
-
+	$exe = $conn->prepare($sql);
+    $exe->execute();
 	$exe->setFetchMode(PDO::FETCH_ASSOC);
-	//$resultSet = $exe->fetchAll();
-	// print_r($resultSet);
 	?>
-	<h3>USERS LIST</h3>
+	<h4>USERS LIST</h4>
 	<table>
 	  <tr>
 	    <th>Numbers</th>
@@ -25,20 +28,15 @@
 	    <th>Image</th>
 	  </tr>
 	  <?php
-	  while($resultSet = $exe->fetch()){
-	  	$idusers=$resultSet['idusers'];
-	  	$username=$resultSet['username'];
-	  	$fullname=$resultSet['fullname'];
-	  	$email=$resultSet['email'];
-	  	$image=$resultSet['image'];
-	  	// if($image!=''){
-	  	// 	$path_url='Images/'.$image;
-	  	// }else{
-	  	// 	$path_url='Khong co hinh';
-	  	// }
+	  while($users = $exe->fetch()){
+	  	$iduser=$users['id'];
+	  	$username=$users['username'];
+	  	$fullname=$users['fullname'];
+	  	$email=$users['email'];
+	  	$image=$users['image'];
 	   ?>
 	  <tr>
-	    <td><?php echo $idusers ?></td>
+	    <td><?php echo $iduser ?></td>
 	    <td><?php echo $username ?></td>
 	    <td><?php echo $fullname ?></td>
 	   <td><?php echo $email ?></td>
@@ -51,7 +49,7 @@
 	    	<?php 
 	    	}
 	    	else{
-	    		echo 'Khong co hinh';
+	    		echo 'No image';
 	    	}
 	    	?>
 
@@ -61,6 +59,7 @@
 		}
 	  ?>
 	</table>
+	<h3><a href="logout.php">LOGOUT</h3>
 </div>
 </body>
 </html>
