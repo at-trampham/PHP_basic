@@ -46,7 +46,9 @@ include('dbconnect.php');
     <label>Username:</label><br>
     <input class='' type="text" name="username" value=""><br>
     <label>Password:</label><br>
-    <input type="password" name="password" value=""><br>
+    <input type="password" name="password" id="mainpassword" value=""><br>
+    <label>Confirm password:</label><br>
+    <input type="password" name="confirmpassword" value=""><br>
     <label>Fullname:</label><br>
     <input type="text" name="fullname" value=""><br>
     <label>Email:</label><br>
@@ -66,6 +68,11 @@ include('dbconnect.php');
           },
         password:{
           required:true,
+          
+        },
+         confirmpassword:{
+          required:true,
+          equalTo : "#mainpassword"
           
         },
         fullname:{
