@@ -32,9 +32,9 @@ include('../public/layout/header.php');
                 detail: "required",
             },
             messages: {
-                title: "Vui lòng nhập tieu de",
-                description: "Vui lòng nhập mo ta",
-                detail:"Vui long nhap chi tiet",
+                title: "Title is empty",
+                description: "Description is empty",
+                detail:"Detail is empty",
             }
         });
     });

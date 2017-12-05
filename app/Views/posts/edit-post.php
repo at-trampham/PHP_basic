@@ -25,7 +25,7 @@ include('../public/layout/header.php');
       <textarea cols="137" rows="7" name='detail' required ><?php echo $detail_post ?></textarea>
     </div>
     <div class="form-group">
-     <button type="submit" name='submit'>Sua</button>
+     <button type="submit" name='submit'>Edit</button>
     </div>
   </form>
 </div>
@@ -38,9 +38,9 @@ include('../public/layout/header.php');
                 detail: "required",
             },
             messages: {
-                title: "Vui lòng nhập tieu de",
-                description: "Vui lòng nhập mo ta",
-                detail:"Vui long nhap chi tiet",
+                title: "Title is empty",
+                description: "Description is empty",
+                detail:"Detail is empty",
             }
         });
     });

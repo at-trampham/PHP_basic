@@ -12,10 +12,10 @@ class Post extends Model
         $stmt = static::$db->prepare($sql);
         return $stmt->execute();
     }
-    public function show($fields = ['*']){
+    public function show($fields = ['*'], $offset, $limit){
 
             $fields = implode(',', $fields);
-            $sql = "SELECT {$this->table}.{$fields},users.username FROM {$this->table} INNER JOIN users ON {$this->table}.id_users= users.id";
+            $sql = "SELECT {$this->table}.{$fields},users.username FROM {$this->table} INNER JOIN users ON {$this->table}.id_users= users.id limit $offset, $limit";
             $stmt = static::$db->prepare($sql);
             $stmt->execute();
             return $stmt->fetchAll();
@@ -36,5 +36,12 @@ class Post extends Model
 
         $stmt = static::$db->prepare($sql);
         return $stmt->execute();
+    }
+    public function row_count(){
+        $sql="SELECT COUNT(id) as rowcount FROM {$this->table}";
+        $stmt = static::$db->prepare($sql);
+        $stmt->execute();
+        $num_rows = $stmt->fetchColumn();
+        return $num_rows;
     }
 }

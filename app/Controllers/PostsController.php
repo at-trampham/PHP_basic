@@ -7,10 +7,14 @@
      use App\Models\User;
     class PostsController extends Controller
     {
-        public function index()
+        public function index($offset = 1)
         {
-             $obj=new Post();
-             $data['post_data']=$obj->show();       
+             define('NUM', '3');
+             $obj=new Post(); 
+             $rowcount=$obj->row_count();
+             $numpage=ceil($rowcount/NUM);
+             $data['post_data']=$obj->show(['*'], ($offset-1)*NUM, NUM);   
+             $data['total_page']=$numpage;
              view('posts.index',$data);
         }
         public function post(){
@@ -72,4 +76,6 @@
             }
            
         }
+
+
     }

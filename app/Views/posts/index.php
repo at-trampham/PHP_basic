@@ -34,7 +34,13 @@ include '../public/layout/header.php';
           ?>
           <!-- Pager -->
           <div class="clearfix">
-            <a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a>
+            <?php 
+            for ($i=0; $i < $total_page; $i++) { 
+            ?>
+            <a class="btn btn-primary float-left" href="<?php echo "/posts/index/".($i+1) ?>"><?php echo $i+1 ?> </a>
+            <?php
+            }
+            ?>
           </div>
         </div>
       </div>

@@ -12,5 +12,10 @@ class User extends Model
         $stmt->execute();
 		return $stmt->fetch();
     }
-
+    public function check_account($username){
+    	$sql="SELECT * FROM users WHERE username='$username'";
+    	$stmt = static::$db->prepare($sql);
+        $stmt->execute();
+		return $stmt->fetch();
+    }
 }

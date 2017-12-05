@@ -45,11 +45,11 @@ use App\Core\Session;
            if(Session::get('arr_user')!=null){
                
         ?>
-        <a class="navbar-brand" href="/posts/index">Xin chao <font color='red'><?php echo Session::get('arr_user')['username']; ?></font></a>
+        <a class="navbar-brand" href="index.html">Xin chao <font color='red'><?php echo Session::get('arr_user')['username']; ?></font></a>
         <?php
           }else{
         ?>
-        <a class="navbar-brand" href="index.html">Hello Guest</a>
+        <a class="navbar-brand" href="/posts/index">Hello Guest</a>
         <?php
           }
         ?>
@@ -75,6 +75,14 @@ use App\Core\Session;
             </li>
             <?php
               }
+              else
+              {
+            ?>
+            <li class="nav-item">
+              <a class="nav-link" href="/users/register">Register</a>
+            </li>
+            <?php
+              }
             ?>
             <li class="nav-item">
               <?php 
@@ -86,10 +94,12 @@ use App\Core\Session;
               }else{ 
               ?>
               <a class="nav-link" href="/users/login">Login</a>
+
               <?php
                 }
               ?>
             </li>
+            
           </ul>
         </div>
       </div>
@@ -109,4 +119,3 @@ use App\Core\Session;
         </div>
       </div>
     </header>
-    

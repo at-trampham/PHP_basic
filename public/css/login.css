@@ -58,7 +58,11 @@ span.psw {
     float: right;
     padding-top: 16px;
 }
-
+p.alignCenter{
+    text-align: center;
+    color: red;
+    font-size: 18px;
+}
 /* Change styles for span and cancel button on extra small screens */
 @media screen and (max-width: 300px) {
     span.psw {
