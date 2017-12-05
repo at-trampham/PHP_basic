@@ -18,4 +18,9 @@ class User extends Model
         $stmt->execute();
 		return $stmt->fetch();
     }
+    public function insert($username,$password){
+        $sql = "INSERT INTO {$this->table}(username,password) VALUES ('$username','$password')";
+        $stmt = static::$db->prepare($sql);
+        return $stmt->execute();
+    }
 }

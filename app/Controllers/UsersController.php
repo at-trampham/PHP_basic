@@ -35,15 +35,19 @@
             view('users.login');
         }
         public function register(){
+            $obj=new User();
             if(isset($_POST['submit'])){
                 $username=$_POST['username'];
                 $password=$_POST['password'];
-                $obj=new User();
                 $data=$obj->check_account($username);
                 $count=count($data);
                 if($count>1){
                     $data['error']="Username is invalid,it has existed";
                     return view("users.register",$data);
+                }else{
+                    $result=$obj->insert($username,$password);
+                    header('LOCATION:/users/login');
+                    exit();
                 }
             }
             view("users.register");
