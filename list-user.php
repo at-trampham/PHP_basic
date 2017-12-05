@@ -13,10 +13,26 @@
 	<div class='alignCenter'>
 	
 	<?php
-	$sql = "SELECT * FROM users";
+	//Phân trang
+	$recordPerPage = 3;
+	if(isset($_GET['page'])){
+		$current_page=$_GET["page"];
+	}else{
+		$current_page=1;
+	}
+	
+	$offset=($current_page-1)*$recordPerPage;
+	$sql="SELECT COUNT(id) as numrow FROM users";
+	$exe = $conn->prepare($sql);
+    $exe->execute();
+	$numrow=$exe->fetchColumn();
+	$numpage=ceil($numrow/$recordPerPage);
+
+	$sql = "SELECT * FROM users LIMIT $offset,$recordPerPage";
 	$exe = $conn->prepare($sql);
     $exe->execute();
 	$exe->setFetchMode(PDO::FETCH_ASSOC);
+	
 	?>
 	<h4>USERS LIST</h4>
 	<table>
@@ -59,6 +75,14 @@
 		}
 	  ?>
 	</table>
+	<br>
+	<div>
+	<?php
+	for ($i=1; $i <= $numpage ; $i++) { 
+		echo "<a href='list-user.php?page=$i'>Trang $i</a>-";
+	}
+	?>
+	</div>
 	<h3><a href="logout.php">LOGOUT</h3>
 </div>
 </body>
