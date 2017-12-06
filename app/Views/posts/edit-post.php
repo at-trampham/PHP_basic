@@ -29,22 +29,6 @@ include('../public/layout/header.php');
     </div>
   </form>
 </div>
-<!-- <script type="text/javascript">
-      $(document).ready(function() {
-        $("#myForm").validate({
-            rules: {
-                title: "required",
-                description: "required",
-                detail: "required",
-            },
-            messages: {
-                title: "Title is empty",
-                description: "Description is empty",
-                detail:"Detail is empty",
-            }
-        });
-    });
-</script> -->
 <script>
 function validateForm() {
     var title = document.forms["myForm"]["usr"].value;
