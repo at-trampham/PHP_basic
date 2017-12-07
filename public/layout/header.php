@@ -48,7 +48,7 @@ use App\Core\Session;
            if(Session::get('arr_user')!=null){
                
         ?>
-        <a class="navbar-brand" href="/posts/index">Xin chao <font color='red'><?php echo Session::get('arr_user')['username']; ?></font></a>
+        <a class="navbar-brand" href="/posts/index">Hello <font color='red'><?php echo Session::get('arr_user')['username']; ?></font></a>
         <?php
           }else{
         ?>
