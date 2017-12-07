@@ -5,19 +5,23 @@ include ('../public/layout/header.php');
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
              <div class="post-preview">
-              <h3>THONG TIN USERS</h3>
-              <p>Username: <font color="blue" size=3><?php echo $data[0]['username']?></font></p>
-              <h3>CAC BAI VIET DA DANG:</h3>
+              <h3>USER INFORMATION</h3>
+              <p>Username: <font color="blue" size=3><?php echo $User['username']?></font></p>
+              <h3>THE ARTICLES WERE POSTED:</h3>
             </div>
               <?php 
-              foreach ($data as $dt) {
-                $id=$dt['id'];
-                $title=$dt['title'];
-                $description=$dt['description'];
-                $detail_post=$dt['detail_post'];
-                $date_create=$dt['date_create'];
-                $id_users=$dt['id_users'];
-                $username=$dt['username'];
+              if(isset($err)){
+                echo "<p><font color='blue' size=4>$err</font></p>";
+              }
+              else{
+                foreach ($data as $dt) {
+                  $id=$dt['id'];
+                  $title=$dt['title'];
+                  $description=$dt['description'];
+                  $detail_post=$dt['detail_post'];
+                  $date_create=$dt['date_create'];
+                  $id_users=$dt['id_users'];
+                  $username=$dt['username'];
 
               ?>
               <div class="post-preview">
@@ -37,6 +41,7 @@ include ('../public/layout/header.php');
           <hr>
             <?php 
                 }
+              }
             ?>
           <!-- Pager -->
           

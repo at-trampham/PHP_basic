@@ -10,9 +10,19 @@
     {
         public function personal($id)
         {
-            $obj=new Post();
-            $user_post['data']=$obj->user_post($id);
-            view('users.personal-info',$user_post);
+            if(empty($_SESSION)){
+                header("LOCATION:/users/login");
+            }else{  
+                $obj=new Post();
+                $user_post=$obj->user_post($id);
+                $data=Session::get('arr_user');
+                if(empty($user_post)){
+                   $error="There is no recent post";
+                    return view('users.personal-info',['User'=>$data,'err'=>$error]);
+                }else{
+                view('users.personal-info',['User'=>$data,'data'=>$user_post]);
+                }
+            }
         }
         public function login(){
             if(isset($_POST['submit'])){
