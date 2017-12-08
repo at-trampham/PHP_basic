@@ -32,10 +32,10 @@ include ('../public/layout/header.php');
               <a href="#"><?php echo $username ?></a>
               on <?php echo $date_create ?></font></p>
               <form action="/posts/delete_post/<?php echo $id ?>" method="post">
-                <input type="submit" name='delete' onClick="return confirm('Delete this post?')" value='Xoa'>
+                <input type="submit" name='delete' onClick="return confirm('Delete this post?')" value='Delete'>
               </form><br>
               <form action="/posts/edit_post/<?php echo $id ?>" method="post">
-                <input type="submit" name='edit' value='Sua'>
+                <input type="submit" name='edit' value='Edit'>
               </form>
           </div>
           <hr>

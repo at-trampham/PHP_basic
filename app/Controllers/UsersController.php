@@ -38,7 +38,7 @@
                     exit();
                 }
                 else{
-                    $err='Sai ten dang nhap hoac mat khau';
+                    $err='Username or password not true';
                 }
             }
 
